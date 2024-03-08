@@ -1,0 +1,20 @@
+{
+    "extends": "@diia-inhouse/configs/tsconfig",
+    "compilerOptions": {
+        "outDir": "dist",
+        "declaration": true,
+        "declarationDir": "dist/types",
+        "baseUrl": ".",
+        "plugins": [
+            {
+                "transform": "typescript-transform-paths"
+            },
+            {
+                "transform": "typescript-transform-paths",
+                "afterDeclarations": true
+            }
+        ]
+    },
+    "include": ["src/**/*"],
+    "exclude": ["node_modules", "tests"]
+}
