@@ -26,7 +26,7 @@ This repository contains the package with eslint plugin.
 Example:
 
 ```
-git clone https://github.com/diia-open-source/eslint-plugin.git
+git clone https://github.com/diia-open-source/be-eslint-plugin.git eslint-plugin
 ```
 
 ---

@@ -1,6 +1,6 @@
 {
     "name": "@diia-inhouse/eslint-plugin",
-    "version": "1.6.0",
+    "version": "1.6.1",
     "description": "common eslint plugin",
     "main": "dist/index.js",
     "types": "dist/types/index.d.ts",
