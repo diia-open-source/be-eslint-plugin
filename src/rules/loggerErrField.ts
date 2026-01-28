@@ -1,23 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { simpleTraverse as traverse } from '@typescript-eslint/typescript-estree'
-import { AST_NODE_TYPES, ESLintUtils, TSESTree } from '@typescript-eslint/utils'
-import { RuleListener, RuleModule } from '@typescript-eslint/utils/dist/ts-eslint'
-
-import { getDocLink } from '../utils'
+import { AST_NODE_TYPES, TSESTree } from '@typescript-eslint/utils'
+import { createRule } from '../utils'
 
 const ruleName = 'err-field'
-
-type MessageIds = typeof ruleName
 
 const loggerKeyword = 'logger'
 const errorKeyword = 'err'
 
-const createRule = ESLintUtils.RuleCreator((name) => getDocLink(name))
-
-function isLoggerCall(callExpressionNode: TSESTree.CallExpression): boolean {
+function isLoggerCall(callExpressionNode: TSESTree.Node): boolean {
     let result = false
 
-    traverse(<any>callExpressionNode, {
+    traverse(callExpressionNode, {
         enter: (node) => {
             if (!result && node.type === AST_NODE_TYPES.MemberExpression) {
                 if (
@@ -66,7 +60,7 @@ function getLoggerArgs(catchNode: TSESTree.BaseNode): TSESTree.Node[] {
     return result
 }
 
-const rule: RuleModule<MessageIds, never[], RuleListener> = createRule({
+const rule = createRule({
     create(context) {
         return {
             CatchClause(catchNode): void {
@@ -82,7 +76,7 @@ const rule: RuleModule<MessageIds, never[], RuleListener> = createRule({
                     if (arg.type === AST_NODE_TYPES.Identifier) {
                         if (arg.name === catchErrorParamName) {
                             context.report({
-                                messageId: 'err-field',
+                                messageId: ruleName,
                                 node: arg,
                             })
 
@@ -100,7 +94,7 @@ const rule: RuleModule<MessageIds, never[], RuleListener> = createRule({
                                         enter: (variableNode) => {
                                             if (isObjectContainWrongErrorParam(variableNode, catchErrorParamName)) {
                                                 context.report({
-                                                    messageId: 'err-field',
+                                                    messageId: ruleName,
                                                     node: variableNode,
                                                 })
                                             }
@@ -118,7 +112,7 @@ const rule: RuleModule<MessageIds, never[], RuleListener> = createRule({
                             enter: (objectNode) => {
                                 if (isObjectContainWrongErrorParam(objectNode, catchErrorParamName)) {
                                     context.report({
-                                        messageId: 'err-field',
+                                        messageId: ruleName,
                                         node: objectNode,
                                     })
                                 }
@@ -133,7 +127,6 @@ const rule: RuleModule<MessageIds, never[], RuleListener> = createRule({
     meta: {
         docs: {
             description: 'Error must be logged only in the object with [err] field. For example: <{err: e}>',
-            recommended: 'error',
         },
         messages: {
             'err-field': 'Error must be logged only in the object with [err] field. For example: <{err: e}>',

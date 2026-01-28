@@ -2,8 +2,11 @@
     "extends": "@diia-inhouse/configs/tsconfig",
     "compilerOptions": {
         "baseUrl": "../",
+        "module": "ESNext",
+        "moduleResolution": "Bundler",
+        "isolatedModules": true,
         "noEmit": true,
         "strict": true
     },
-    "include": ["./**/*"]
+    "include": ["./**/*", "../vitest.config.mts"]
 }

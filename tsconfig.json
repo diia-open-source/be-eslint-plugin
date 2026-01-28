@@ -5,15 +5,7 @@
         "declaration": true,
         "declarationDir": "dist/types",
         "baseUrl": ".",
-        "plugins": [
-            {
-                "transform": "typescript-transform-paths"
-            },
-            {
-                "transform": "typescript-transform-paths",
-                "afterDeclarations": true
-            }
-        ]
+        "skipLibCheck": true
     },
     "include": ["src/**/*"],
     "exclude": ["node_modules", "tests"]
