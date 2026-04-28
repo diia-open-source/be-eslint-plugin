@@ -1,6 +1,6 @@
 {
     "name": "@diia-inhouse/eslint-plugin",
-    "version": "1.9.5",
+    "version": "1.9.6",
     "description": "common eslint plugin",
     "main": "dist/index.js",
     "types": "dist/types/index.d.ts",
@@ -60,6 +60,6 @@
     "madge": {
         "tsConfig": "./tsconfig.json"
     },
-    "repository": "https://github.com/diia-open-source/be-eslint-plugin.git",
+    "repository": "https://github.com/diia-open-source/be-eslint-plugin",
     "license": "SEE LICENSE IN LICENSE.md"
 }
